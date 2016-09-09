@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Deployer N&D - v1.0.0</title>
+		<meta charset='UTF-8'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+		<script language='javascript' src='js/app/app.js'></script>
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body ng-app="DeployerND">
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Deployer N&D</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+				<li><a href="#">Job</a></li>
+			  </ul>
+			</div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<div class='container'>
+			<div class='row' ng-show="!isLogged" ng-controller="LoginController">
+				<div class='col-md-4'></div>
+				<div id='log' class='col-md-4'>
+					  <div class="form-group">
+						<label for="exampleInputEmail1">Email address</label>
+						<input type="text" ng-model="username" class="form-control" id="exampleInputEmail1" placeholder="Email">
+					  </div>
+					  <div class="form-group">
+						<label for="exampleInputPassword1">Password</label>
+						<input type="password" ng-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+					  </div>
+					  <button ng-click="login()" class="btn btn-default">Login</button>
+				</div>
+				<div class='col-md-4'></div>
+			</div>
+			<div class='row' ng-hide="!isLogged" ng-controller="JobController">
+				<div class='col-md-3'></div>
+				<div class='col-md-6'>
+					<div class="table-responsive">
+					  <table class="table">
+						<tr>
+							<th>Nome Job</th>
+							<th>Esegui</th>
+						</tr>
+						<tr ng-repeat="job in jobs">
+							<td>{{job.title}}</td>
+							<td></td>						
+						</tr>
+					  </table>
+					</div>
+				</div>
+				<div class='col-md-3'></div>
+			</div>
+		</div>
+	</body>
+</html>
