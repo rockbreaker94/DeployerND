@@ -21,13 +21,32 @@ app.controller("LoginController",function($scope,HomeService,$rootScope){
 		}
 	}
 });
-app.controller("JobController",function($scope,$http,HomeService,$rootScope){
+app.controller("JobController",function($scope,$http,HomeService,$rootScope,$location){
 	$scope.isLogged = false;
+	$scope.isSingle = false;
 	$scope.jobs = [];
+	$scope.id = 0;
 	$rootScope.$on("logged",function(){
 		$scope.isLogged = HomeService.isLogged();
 		$http.get('/job').then(function(response){
 			$scope.jobs = response.data;
 		});
 	});
+	$scope.esegui = function(id){
+		$scope.isSingle = true;
+		$scope.id = id;
+		$http.get('/job/'+id+'/home').then(function(response){
+			$scope.jobb = response.data;
+		});
+	}
+	$scope.play = function(id){
+		var socket = io();
+		socket.emit("exe",{id:id});
+		socket.on("ese",function(dati){
+			var div = document.getElementById('log');
+			var p = document.createElement("P");
+			p.innerHTML = "[Server] "+dati;
+			div.append(p);
+		});
+	}
 });
