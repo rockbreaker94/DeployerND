@@ -1,4 +1,5 @@
 var app = angular.module("DeployerND",["ngRoute"]);
+var socket = io();
 app.factory("HomeService",function(){
 	var logged = false;
 	var setLogged = function(){logged = true;}
@@ -40,7 +41,6 @@ app.controller("JobController",function($scope,$http,HomeService,$rootScope,$loc
 		});
 	}
 	$scope.play = function(id){
-		var socket = io();
 		socket.emit("exe",{id:id});
 		socket.on("ese",function(dati){
 			var div = document.getElementById('log');
