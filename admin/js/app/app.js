@@ -1,4 +1,5 @@
 var app = angular.module("DeployerND",["ngRoute"]);
+
 var socket = io();
 app.factory("HomeService",function(){
 	var logged = false;
@@ -47,6 +48,7 @@ app.controller("JobController",function($scope,$http,HomeService,$rootScope,$loc
 			var p = document.createElement("p");
 			p.innerHTML = "[Server] "+dati;
 			div.appendChild(p);
+			$("#logger").scrollTop( document.getElementById("logger").scrollHeight);
 		});
 	}
 });

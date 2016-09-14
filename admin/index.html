@@ -8,6 +8,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
 		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 		<script language='javascript' src='js/app/app.js'></script>
 		<link rel="stylesheet" href="css/style.css">
 	</head>
@@ -90,10 +91,8 @@
 					<div class='col-md-3'></div>
 				</div>
 				<div class='row' ng-hide="!isLogged">
-					<div class='col-md-1'></div>
-						<div id='logger' class='col-md-10 table-responsive' ng-hide='!isSingle'>
+						<div id='logger' class='col-md-12 table-responsive' ng-hide='!isSingle'>
 						</div>
-					<div class='col-md-1'></div>
 				</div>
 			</div>
 		</div>

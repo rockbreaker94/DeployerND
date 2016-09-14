@@ -10,5 +10,5 @@ table{background-color:white;}
 .navbar{box-shadow:5px 7px 5px #aaa;}
 #log{border:1px solid #aaa;border-radius:15px; box-shadow:5px 7px 5px #888;background-color:white;padding:20px;}
 #loggger{border:1px solid #aaa;border-radius:15px; box-shadow:5px 7px 5px #888;background-color:white;padding:20px;}
-.table-responsive{border:1px solid #aaa;border-radius:15px; box-shadow:5px 7px 5px #888;background-color:white;padding:20px;max-height:300px;overflow:auto;}
+.table-responsive{border:1px solid #aaa;border-radius:15px; box-shadow:5px 7px 5px #888;background-color:white;padding:20px;max-height:700px;overflow:auto;}
 .ese{background-image: url('../img/btn_esegui.png');width:32px;height:32px;background-size:100%;cursor:pointer;}
