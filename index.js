@@ -2,10 +2,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
-var io = require('socket.io')(http);
 var obj = JSON.parse(fs.readFileSync('jobs.json', 'utf8'));
 var sh = require("shelljs");
 var http = require('http').Server(app);
+var io = require('socket.io')(http);
 app.use(express.static(__dirname+"/admin"));
 app.use( bodyParser.json() );  
 app.get("/",function(req,res){
@@ -28,8 +28,7 @@ http.listen(process.env.PORT || 5000, function(){
 });
 io.on('connection',function(socket){
 	socket.on('exe',function(data){
-		console.log(data);
-		if(req.id==2){
+		if(data.id==2){
 			var child = sh.exec('git clone https://github.com/rockbreaker94/NandDEvolutiva.git', {async:true});
 			child.stderr.on('data', function(data) {
 				socket.emit("ese",data);

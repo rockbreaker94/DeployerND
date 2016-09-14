@@ -50,50 +50,51 @@
 				</div>
 				<div class='col-md-4'></div>
 			</div>
-			<div class='row' ng-hide="!isLogged" ng-controller="JobController">
-				<div class='col-md-3'></div>
-				<div class='col-md-6' ng-show='!isSingle'>
-					<div class="table-responsive">
-					  <table class="table">
-						<tr>
-							<th>Nome Job</th>
-							<th>Esegui</th>
-						</tr>
-						<tr ng-repeat="job in jobs">
-							<td>{{job.title}}</td>
-							<td><div ng-click="esegui(job.id)" class='ese'></div></td>						
-						</tr>
-					  </table>
-					</div>
-				</div>
-				<div class='col-md-6' ng-hide='!isSingle'>
-					<div class="table-responsive">
-					  <table class="table">
-						 <tr>
-							<th>Titolo Job</th>
-							<th>Nome Job</th>
-							<th>Id</th>
-						 </tr>
-						 <tr>
-							<td>{{jobb.title}}</td>
-							<td>{{jobb.name}}</td>
-							<td>{{jobb.id}}</td>
-						 </th>
-					  </table>
-					  <div class='col-md-12'ng-hide='!isSingle'>
-						<button ng-click="play(jobb.id)" class='btn btn-primary'>Play</button>
-					  </div>
-					</div>
-					
-				</div>
-				<div class='col-md-3'></div>
-				<div class='col-md-3'></div>
-					<div class='col-md-6' ng-hide='!isSingle'>
-						<div id='log' class="table-responsive">
-							
+			<div ng-controller="JobController">
+				<div class='row' ng-hide="!isLogged">
+					<div class='col-md-3'></div>
+					<div class='col-md-6' ng-show='!isSingle'>
+						<div class="table-responsive">
+						  <table class="table">
+							<tr>
+								<th>Nome Job</th>
+								<th>Esegui</th>
+							</tr>
+							<tr ng-repeat="job in jobs">
+								<td>{{job.title}}</td>
+								<td><div ng-click="esegui(job.id)" class='ese'></div></td>						
+							</tr>
+						  </table>
 						</div>
 					</div>
-				<div class='col-md-3'></div>
+					<div class='col-md-6' ng-hide='!isSingle'>
+						<div class="table-responsive">
+						  <table class="table">
+							 <tr>
+								<th>Titolo Job</th>
+								<th>Nome Job</th>
+								<th>Id</th>
+							 </tr>
+							 <tr>
+								<td>{{jobb.title}}</td>
+								<td>{{jobb.name}}</td>
+								<td>{{jobb.id}}</td>
+							 </th>
+						  </table>
+						  <div class='col-md-12'ng-hide='!isSingle'>
+							<button ng-click="play(jobb.id)" class='btn btn-primary'>Play</button>
+						  </div>
+						</div>
+						
+					</div>
+					<div class='col-md-3'></div>
+				</div>
+				<div class='row' ng-hide="!isLogged">
+					<div class='col-md-1'></div>
+						<div id='logger' class='col-md-10 table-responsive' ng-hide='!isSingle'>
+						</div>
+					<div class='col-md-1'></div>
+				</div>
 			</div>
 		</div>
 	</body>

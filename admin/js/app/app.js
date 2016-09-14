@@ -43,10 +43,10 @@ app.controller("JobController",function($scope,$http,HomeService,$rootScope,$loc
 	$scope.play = function(id){
 		socket.emit("exe",{id:id});
 		socket.on("ese",function(dati){
-			var div = document.getElementById('log');
-			var p = document.createElement("P");
+			var div = document.getElementById('logger');
+			var p = document.createElement("p");
 			p.innerHTML = "[Server] "+dati;
-			div.append(p);
+			div.appendChild(p);
 		});
 	}
 });
