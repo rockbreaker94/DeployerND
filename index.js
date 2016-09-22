@@ -28,11 +28,40 @@ http.listen(process.env.PORT || 5000, function(){
 });
 io.on('connection',function(socket){
 	socket.on('exe',function(data){
-		if(data.id==2){
-			var child = sh.exec('git clone https://github.com/rockbreaker94/NandDEvolutiva.git', {async:true});
-			child.stderr.on('data', function(data) {
+		if(data.id==2){//merge dall'evo alla correttiva'
+			var deleteRepo = sh.rm('-rf','/NandDCorr/*');
+			var clone = sh.exec('git clone https://github.com/rockbreaker94/NandDCorr.git', {async:true});
+			clone.stderr.on('data', function(data) {
 				socket.emit("ese",data);
 			});
+			clone.stderr.on('end',function(){
+				var cd = sh.exec('cd NandDCorr');
+				var addRemote = sh.exec('git remote add NandDEvolutiva https://github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
+				addRemote.stderr.on('data',function(data){
+					socket.emit('ese',data);
+				});
+				addRemote.stderr.on('end',function(){
+					var fetchEvo = sh.exec('git fetch NandDEvolutiva',{async:true});
+					fetchEvo.stderr.on('data',function(data){
+						socket.emit('ese',data);
+					});
+					fetchEvo.stderr.on('end',function(){
+						var mergeEvo = sh.exec('git merge NandDEvolutiva/master',{aync:true});
+						mergeEvo.stderr.on('data',function(data){
+							socket.emit('ese',data);
+						});
+						mergeEvo.stderr.on('end',function(){
+							var removeRemote = sh.exec('git remote remove NandDEvolutiva',{async:true});
+							removeRemote.stderr.on('data',function(data){
+								socket.emit('ese',data);
+							});
+							removeRemote.stderr.on('end',function(){
+								socket.emit('ese','###FINISH JOB###');
+							});
+						})
+					});
+				});
+			});					
 		}
 	});
 });
