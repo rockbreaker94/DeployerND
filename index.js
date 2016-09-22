@@ -35,7 +35,7 @@ io.on('connection',function(socket){
 				socket.emit("ese",data);
 			});
 			clone.stderr.on('end',function(){
-				var cd = sh.exec('cd NandDCorr');
+				var cd = sh.cd('NandDCorr');
 				var addRemote = sh.exec('git remote add NandDEvolutiva https://github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
 				addRemote.stderr.on('data',function(data){
 					socket.emit('ese',data);
