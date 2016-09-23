@@ -33,12 +33,12 @@ io.on('connection',function(socket){
 			socket.emit('ese','Cancellazione correttiva old');
 			var deleteRepoB = sh.rm('-rf','NandDEvolutiva');
 			socket.emit('ese','Cancellazione evolutiva old');
-			var cloneA = sh.exec('git clone rockbreaker94:tuononno94@github.com/rockbreaker94/NandDCorr.git', {async:true});
+			var cloneA = sh.exec('git clone https://rockbreaker94:tuononno94@github.com/rockbreaker94/NandDCorr.git', {async:true});
 			cloneA.stderr.on('data', function(data) {
 				socket.emit("ese",data);
 			});
 			cloneA.stderr.on('end',function(){
-				var cloneB = sh.exec('git clone rockbreaker94:tuononno94@github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
+				var cloneB = sh.exec('git clone https://rockbreaker94:tuononno94@github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
 				cloneB.stderr.on('data',function(data){
 					socket.emit('ese',data);
 				});
