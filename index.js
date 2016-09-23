@@ -33,7 +33,8 @@ io.on('connection',function(socket){
 			socket.emit('ese','Cancellazione correttiva old');
 			var deleteRepoB = sh.rm('-rf','NandDEvolutiva');
 			socket.emit('ese','Cancellazione evolutiva old');
-			var usernameInit = sh.exec('git config --global user.email "rockbreaker94@gmail.com"');
+			var usermailInit = sh.exec('git config --global user.email "rockbreaker94@gmail.com"');
+			var usernameInit = sh.exec('git config --global user.name "rockbreaker94"');
 			var cloneA = sh.exec('git clone https://rockbreaker94:tuononno94@github.com/rockbreaker94/NandDCorr.git', {async:true});
 			cloneA.stderr.on('data', function(data) {
 				socket.emit("ese",data);
