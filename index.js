@@ -33,44 +33,39 @@ io.on('connection',function(socket){
 			socket.emit('ese','Cancellazione correttiva old');
 			var deleteRepoB = sh.rm('-rf','NandDEvolutiva');
 			socket.emit('ese','Cancellazione evolutiva old');
-			var cloneA = sh.exec('git clone https://github.com/rockbreaker94/NandDCorr.git', {async:true});
+			var cloneA = sh.exec('git clone rockbreaker94:tuononno94@github.com/rockbreaker94/NandDCorr.git', {async:true});
 			cloneA.stderr.on('data', function(data) {
 				socket.emit("ese",data);
 			});
 			cloneA.stderr.on('end',function(){
-				var cloneB = sh.exec('git clone https://github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
+				var cloneB = sh.exec('git clone rockbreaker94:tuononno94@github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
 				cloneB.stderr.on('data',function(data){
 					socket.emit('ese',data);
 				});
-				cloneB.stderr.on('end',function(){				
-					var cd = sh.cd('NandDCorr');
-					var addRemote = sh.exec('git remote add NandDEvolutiva https://github.com/rockbreaker94/NandDEvolutiva.git',{async:true});
-					addRemote.stderr.on('data',function(data){
+				cloneB.stderr.on('end',function(){
+					var mergeEvo = sh.cp('-Rf','NandDEvolutiva/*','NandDCorr/')
+					var cdCorr = sh.cd('NandDCorr')
+					var removeRemote = sh.exec('git add .',{async:true});
+					removeRemote.stderr.on('data',function(data){
 						socket.emit('ese',data);
 					});
-					addRemote.stderr.on('end',function(){
-						var fetchEvo = sh.exec('git fetch NandDEvolutiva',{async:true});
-						fetchEvo.stderr.on('data',function(data){
+					removeRemote.stderr.on('end',function(){
+						var commit = sh.exec('git commit -m "Merge evolutivo su correttivo"',{async:true});
+						commit.stderr.on('data',function(data){
 							socket.emit('ese',data);
 						});
-						fetchEvo.stderr.on('end',function(){
-							var mergeEvo = sh.exec('git clone https://github.com/rockbreaker94/NandDEvolutiva.git https://github.com/rockbreaker94/NandDCorr.git',{async:true});
-							mergeEvo.stderr.on('data',function(data){
+						commit.stderr.on('end',function(){
+							var push = sh.exec('git push origin master',{async:true});
+							push.stderr.on('data',function(data){
 								socket.emit('ese',data);
 							});
-							mergeEvo.stderr.on('end',function(){
-								var removeRemote = sh.exec('git remote remove NandDEvolutiva',{async:true});
-								removeRemote.stderr.on('data',function(data){
-									socket.emit('ese',data);
-								});
-								removeRemote.stderr.on('end',function(){
-									socket.emit('ese','###FINISH JOB###');
-								});
-							})
+							push.stderr.on('end',function(){
+								socket.emit('ese','###FINISH JOB###');
+							});
 						});
 					});
 				});
-			});					
+			});		
 		}
 	});
 });
